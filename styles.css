@@ -1845,6 +1845,7 @@ small {
   width: 118px;
   height: 118px;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .donut-svg {
@@ -1871,6 +1872,37 @@ small {
   font-size: 10px;
   fill: #97a0b2;
   font-family: inherit;
+}
+
+.donut-float-label {
+  position: absolute;
+  min-width: 64px;
+  padding: 6px 8px;
+  border: 1px solid #e8e8ed;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.95);
+  color: #26356d;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  box-shadow: 0 3px 8px rgba(40,41,61,0.09);
+  pointer-events: none;
+  z-index: 5;
+}
+.donut-float-label small {
+  display: block;
+  margin-top: 3px;
+  color: #9a9eaa;
+  font-size: 8px;
+  font-weight: 500;
+}
+.donut-float-80 {
+  top: -8px;
+  right: -26px;
+}
+.donut-float-20 {
+  left: -8px;
+  bottom: -12px;
 }
 
 .donut-tip {
@@ -2603,6 +2635,19 @@ small {
 .dashboard-frame .donut-chart-wrap {
   width: 160px;
   height: 160px;
+}
+.dashboard-frame .donut-float-80 {
+  top: -10px;
+  right: -32px;
+  font-size: 11px;
+}
+.dashboard-frame .donut-float-20 {
+  left: -10px;
+  bottom: -16px;
+  font-size: 11px;
+}
+.dashboard-frame .donut-float-label small {
+  font-size: 9px;
 }
 
 .dashboard-frame .consult-stats {
