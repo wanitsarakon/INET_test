@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <!-- Body (salmon skin, visible around scanner) -->
+  <path d="M6 96 L6 46 C6 36 20 28 48 28 C76 28 90 36 90 46 L90 96 Z" fill="#F4A27E"/>
+  <!-- Head -->
+  <circle cx="48" cy="18" r="14" fill="#F4A27E"/>
+  <!-- Neck -->
+  <rect x="41" y="30" width="14" height="8" rx="2" fill="#F4A27E"/>
+  <!-- Blue medical chest scanner/vest -->
+  <rect x="18" y="38" width="60" height="58" rx="10" fill="#2C5FC9"/>
+  <!-- Scanner screen (lighter blue) -->
+  <rect x="22" y="42" width="52" height="50" rx="7" fill="#5A9BE8"/>
+  <!-- Left lung on scan -->
+  <path d="M31 52 C26 50 22 57 25 65 C27 72 33 74 37 72 L38 54 Z" fill="white" opacity="0.9"/>
+  <!-- Right lung on scan -->
+  <path d="M65 52 C70 50 74 57 71 65 C69 72 63 74 59 72 L58 54 Z" fill="white" opacity="0.9"/>
+  <!-- Spine line -->
+  <line x1="48" y1="50" x2="48" y2="72" stroke="white" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <!-- Ribcage arcs -->
+  <path d="M34 59 Q48 62 62 59" fill="none" stroke="white" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
+  <path d="M32 66 Q48 70 64 66" fill="none" stroke="white" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+</svg>

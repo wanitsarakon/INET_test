@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1LIFE System - AI CXR Screening</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-current-view="login">
+    <main>
+      <section class="view page-login is-active" data-view-name="login" aria-label="หน้าเข้าสู่ระบบ">
+        <section class="login-card">
+          <div class="login-left">
+            <img class="login-panel-img" src="assets/aicxrscreening.png" alt="" aria-hidden="true" />
+            <div class="ai-badge" aria-label="Manage AI">
+              <svg viewBox="0 0 72 72" class="ai-badge-mark" aria-hidden="true">
+                <circle cx="36" cy="18" r="8" fill="#41b5ea" />
+                <circle cx="24" cy="25" r="6.4" fill="#6ec9f0" />
+                <circle cx="48" cy="25" r="6.4" fill="#6ec9f0" />
+                <circle cx="18" cy="37" r="6.4" fill="#6ec9f0" />
+                <circle cx="36" cy="36" r="7.2" fill="#2fa8df" />
+                <circle cx="54" cy="37" r="6.4" fill="#6ec9f0" />
+                <circle cx="26" cy="50" r="6.4" fill="#6ec9f0" />
+                <circle cx="46" cy="50" r="6.4" fill="#6ec9f0" />
+              </svg>
+              <span>Manage AI</span>
+            </div>
+
+            <svg class="hero-robot" viewBox="0 0 420 430" aria-hidden="true">
+              <defs>
+                <linearGradient id="robotGlow" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="55%" stop-color="#c7d8ff" />
+                  <stop offset="100%" stop-color="#82a4ff" />
+                </linearGradient>
+                <linearGradient id="scanGlow" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#dfe6ff" stop-opacity="0" />
+                  <stop offset="50%" stop-color="#f6f9ff" stop-opacity="0.95" />
+                  <stop offset="100%" stop-color="#dfe6ff" stop-opacity="0" />
+                </linearGradient>
+                <filter id="softBlueShadow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="14" stdDeviation="11" flood-color="#07145d" flood-opacity=".23" />
+                </filter>
+              </defs>
+
+              <g opacity=".24">
+                <circle cx="80" cy="74" r="6" fill="#72a7ff" />
+                <circle cx="355" cy="92" r="8" fill="#72a7ff" />
+                <circle cx="344" cy="250" r="7" fill="#72a7ff" />
+                <circle cx="88" cy="320" r="8" fill="#72a7ff" />
+                <path d="M86 316l15 11-8 18-17-10z" fill="#72a7ff" />
+                <path d="M337 242l13 9-8 17-15-9z" fill="#72a7ff" />
+              </g>
+
+              <g opacity=".85">
+                <path d="M151 45c13-17 30-23 54-21 10 1 22 5 35 11" fill="none" stroke="#eff4ff" stroke-width="2" stroke-dasharray="2 8" />
+                <path d="M284 34c25 7 44 19 58 35" fill="none" stroke="#eff4ff" stroke-width="2" stroke-dasharray="2 8" opacity=".7" />
+                <path d="M149 86c0-15 7-28 18-38" fill="none" stroke="#eff4ff" stroke-width="1.7" stroke-dasharray="2 7" opacity=".7" />
+              </g>
+
+              <g transform="translate(58 93)">
+                <rect x="0" y="0" width="94" height="130" rx="7" fill="#4454c6" opacity=".44" />
+                <path d="M18 18h48M18 34h57M18 50h34M18 66h52M18 82h42M18 98h58M18 114h32" stroke="#ecf2ff" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M25 12c10 12 16 24 15 39-1 10-3 20-6 30" fill="none" stroke="#ecf2ff" stroke-width="8" stroke-linecap="round" />
+                <path d="M-10 8h112" stroke="url(#scanGlow)" stroke-width="4" opacity=".42" />
+              </g>
+
+              <g transform="translate(250 60)">
+                <path d="M0 17c15-18 37-26 61-25 16 1 32 5 47 12" fill="none" stroke="#dfe6ff" stroke-width="2" stroke-dasharray="2 8" opacity=".8" />
+                <g transform="translate(18 0)">
+                  <path d="M21 4c-2 13-3 25 0 37 4 14 13 29 27 43" fill="none" stroke="#eef4ff" stroke-width="5" stroke-linecap="round" />
+                  <path d="M52 4c2 13 3 25 0 37-4 14-13 29-27 43" fill="none" stroke="#eef4ff" stroke-width="5" stroke-linecap="round" />
+                  <path d="M20 8c9 3 17 6 31 6 10 0 17-2 23-5" fill="none" stroke="#eef4ff" stroke-width="2" stroke-linecap="round" opacity=".75" />
+                  <path d="M24 19c8 2 15 4 27 4 9 0 15-1 20-3" fill="none" stroke="#eef4ff" stroke-width="2" stroke-linecap="round" opacity=".7" />
+                  <path d="M28 31c7 2 12 3 19 3 8 0 14-1 18-2" fill="none" stroke="#eef4ff" stroke-width="2" stroke-linecap="round" opacity=".65" />
+                  <path d="M30 43c6 2 11 3 17 3 7 0 12-1 16-2" fill="none" stroke="#eef4ff" stroke-width="2" stroke-linecap="round" opacity=".6" />
+                </g>
+              </g>
+
+              <g filter="url(#softBlueShadow)">
+                <g transform="translate(175 177)">
+                  <ellipse cx="49" cy="52" rx="47" ry="39" fill="#f6fbff" />
+                  <ellipse cx="35" cy="47" rx="16" ry="23" fill="#96bbff" opacity=".26" />
+                  <ellipse cx="64" cy="47" rx="16" ry="23" fill="#96bbff" opacity=".26" />
+                  <path d="M16 34c7 10 15 14 24 14 9 0 16-4 23-14" fill="none" stroke="#3152d6" stroke-width="6" stroke-linecap="round" />
+                  <path d="M18 63c6 3 14 4 20 4 12 0 22-3 29-8" fill="none" stroke="#6178de" stroke-width="5" stroke-linecap="round" opacity=".85" />
+                  <ellipse cx="28" cy="52" rx="6" ry="9" fill="#1a4cc2" opacity=".85" />
+                  <ellipse cx="70" cy="52" rx="6" ry="9" fill="#1a4cc2" opacity=".85" />
+                  <path d="M38 96c4 8 7 16 11 21" fill="none" stroke="#d7e4ff" stroke-width="8" stroke-linecap="round" />
+                  <path d="M54 96c-2 9-4 18-8 26" fill="none" stroke="#b7c8ff" stroke-width="8" stroke-linecap="round" />
+                </g>
+                <g transform="translate(125 50)">
+                  <path d="M0 82c-5-22 1-43 18-59 9-8 16-8 25-3 12 6 17 18 15 34-2 17-13 35-30 48-8 6-15 4-18-5z" fill="#e9f0ff" />
+                  <path d="M12 29c11 14 16 27 15 43" fill="none" stroke="#f8fbff" stroke-width="8" stroke-linecap="round" />
+                  <path d="M38 24c-3 18-10 34-22 48" fill="none" stroke="#9cb7ff" stroke-width="6" stroke-linecap="round" />
+                </g>
+                <g transform="translate(264 218)">
+                  <path d="M0 42c12-7 24-11 36-11 16 0 30 7 41 22 4 6 2 11-4 14-17 10-33 12-48 6-11-4-20-11-27-21-4-6-3-9 2-10z" fill="#f0f4ff" />
+                  <path d="M14 43c11 6 20 13 27 20" stroke="#96b8ff" stroke-width="7" stroke-linecap="round" />
+                  <circle cx="43" cy="49" r="6" fill="#1f3ec0" />
+                </g>
+                <g transform="translate(172 249)">
+                  <ellipse cx="35" cy="28" rx="28" ry="18" fill="#f5f8ff" />
+                  <ellipse cx="30" cy="22" rx="16" ry="10" fill="#96bcff" opacity=".35" />
+                  <path d="M20 22c7 7 14 10 22 10" fill="none" stroke="#2b4dbf" stroke-width="6" stroke-linecap="round" />
+                  <path d="M35 42c0 15-4 30-11 43" fill="none" stroke="#d6e4ff" stroke-width="8" stroke-linecap="round" />
+                  <path d="M49 42c5 13 8 26 8 40" fill="none" stroke="#bbcaff" stroke-width="8" stroke-linecap="round" />
+                </g>
+              </g>
+            </svg>
+
+            <h1>AI - CXR SCREENING</h1>
+          </div>
+
+          <div class="login-right">
+            <div class="life-logo life-logo-large">
+              <img src="assets/logo.png" alt="1LIFE System" />
+            </div>
+
+            <p class="provider-line">
+              <span>เข้าสู่ระบบด้วยบัญชี</span>
+              <img class="provider-id-img" src="assets/providerid.png" alt="PROVIDER ID" />
+              <span>ของคุณ</span>
+            </p>
+
+            <div class="login-actions">
+              <button class="btn btn-primary" type="button" data-route="xray">ลงชื่อเข้าใช้งาน</button>
+              <button class="btn btn-outline" type="button" data-action="register">ลงทะเบียน</button>
+            </div>
+
+            <div class="or-divider"><span>หรือ</span></div>
+
+            <button class="oneid-button" type="button" data-route="xray">
+              <img class="oneid-mark-logo" src="assets/oneolatform.png" alt="ONE PLATFORM" />
+              <span>เข้าสู่ระบบด้วย ONE ID</span>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="view app-view" data-view-name="xray" aria-label="หน้ารายการ X-ray">
+        <div class="app-frame">
+          <aside class="sidebar">
+            <div class="sidebar-brand">
+              <button class="icon-button menu-button" type="button" data-action="toggle-sidebar" aria-label="ย่อเมนู"><img src="assets/icon-menu.svg" alt="" /></button>
+              <div class="life-logo"><img src="assets/logo.png" alt="1LIFE System" /></div>
+            </div>
+
+            <nav class="side-nav" aria-label="เมนูหลัก">
+              <button class="nav-item" type="button" data-route="dashboard">
+                <img class="nav-icon" src="assets/icon-dashboard.svg" alt="" />
+                <span>Dashboard</span>
+              </button>
+              <div class="nav-group">
+                <button class="nav-item is-active has-caret" type="button" data-route="xray">
+                  <img class="nav-icon" src="assets/icon-list.svg" alt="" />
+                  <span>รายการ X-ray</span>
+                  <img class="nav-caret" src="assets/icon-chevron-up.svg" alt="" />
+                </button>
+                <button class="nav-sub is-active" type="button" data-route="xray">รายการ X-ray ที่นำเข้า</button>
+                <button class="nav-sub" type="button" data-action="waiting-list">รายการ รอ X-ray</button>
+              </div>
+            </nav>
+          </aside>
+
+          <section class="workspace">
+            <header class="topbar">
+              <div class="service-picker">
+                <img class="hospital-pin" src="assets/icon-hospital-pin.svg" alt="" />
+                <select aria-label="เลือกหน่วยบริการ">
+                  <option>หน่วยบริการ A</option>
+                  <option>หน่วยบริการ B</option>
+                  <option>หน่วยบริการ C</option>
+                </select>
+              </div>
+              <div class="topbar-actions">
+                <button class="bell-button" type="button" data-action="notifications" aria-label="การแจ้งเตือน">
+                  <img src="assets/icon-bell.svg" alt="" /><span>1</span>
+                </button>
+                <button class="profile-card" type="button" data-action="user-menu">
+                  <img class="avatar" src="assets/avatar-staff-reference.png" alt="" />
+                  <span>
+                    <strong>นายพัชรินัส จิตภักดี</strong>
+                    <small>เจ้าหน้าที่รังสี</small>
+                  </span>
+                  <img class="button-caret" src="assets/icon-chevron-down.svg" alt="" />
+                </button>
+              </div>
+            </header>
+
+            <div class="content-panel xray-panel">
+              <div class="section-head">
+                <h2>รายการ X-ray ที่นำเข้า</h2>
+                <button class="btn upload-button" type="button" data-action="upload">
+                  <img src="assets/icon-cloud-upload.svg" alt="" />
+                  อัปโหลดฟิล์ม X-ray
+                  <img class="button-caret upload-caret" src="assets/icon-chevron-down-white.svg" alt="" />
+                </button>
+                <input id="fileUpload" type="file" hidden multiple accept=".png,.jpg,.jpeg,.pdf,.dcm" />
+              </div>
+
+              <div class="xray-tabs" role="tablist" aria-label="ประเภท X-ray">
+                <button class="xray-tab is-active" type="button" data-xray-tab="brain">รายการ X-ray สมอง <span>85</span></button>
+                <button class="xray-tab" type="button" data-xray-tab="chest">รายการ X-ray ทรวงอก <span>120</span></button>
+                <button class="xray-tab" type="button" data-xray-tab="eye">รายการ X-ray ดวงตา <span>25</span></button>
+              </div>
+
+              <div class="summary-cards" aria-label="สรุปรายการ">
+                <article class="summary-card is-selected" data-filter-status="all">
+                  <img class="summary-icon brain" src="assets/icon-brain.png" alt="" />
+                  <strong>รายการทั้งหมด</strong>
+                  <b id="totalCases">85 <small>เคส</small></b>
+                </article>
+                <article class="summary-card" data-filter-status="waiting">
+                  <img class="summary-icon waiting" src="assets/icon-waiting.png" alt="" />
+                  <strong>รอยืนยันผล</strong>
+                  <b class="orange" id="waitingCases">40 <small>เคส</small></b>
+                </article>
+                <article class="summary-card" data-filter-status="confirmed">
+                  <img class="summary-icon confirmed" src="assets/icon-confirmed.png" alt="" />
+                  <strong>ยืนยันผลวินิจฉัย</strong>
+                  <b class="green" id="confirmedCases">45 <small>เคส</small></b>
+                </article>
+              </div>
+
+              <div class="toolbar">
+                <label class="search-box">
+                  <input id="xraySearch" type="search" placeholder="ค้นหา" autocomplete="off" />
+                  <img src="assets/icon-search.svg" alt="" />
+                </label>
+                <label class="priority-filter">
+                  <span>ความเร่งด่วนของเคส :</span>
+                  <select id="prioritySelect">
+                    <option value="all">ทั้งหมด</option>
+                    <option value="urgent">เคสด่วน</option>
+                    <option value="normal">เคสปกติ</option>
+                    <option value="waiting">รอยืนยันผล</option>
+                    <option value="confirmed">ยืนยันผลแล้ว</option>
+                  </select>
+                </label>
+                <button class="filter-link" type="button" data-action="advanced-filter"><img src="assets/icon-filter.svg" alt="" />ตัวกรองขั้นสูง</button>
+                <button class="btn export-button" type="button" data-action="export-xray"><img src="assets/icon-export.svg" alt="" />Export</button>
+              </div>
+
+              <div class="table-wrap" aria-live="polite">
+                <table class="xray-table">
+                  <colgroup>
+                    <col /><col /><col /><col /><col /><col /><col /><col /><col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>เลขที่รายการ <svg width="13" height="13" viewBox="0 0 48 48" style="vertical-align:middle;margin-left:2px"><circle cx="24" cy="24" r="19" stroke="#B0B5C3" stroke-width="3" fill="none"/><path d="M24 22v12" stroke="#B0B5C3" stroke-width="3.5" stroke-linecap="round"/><circle cx="24" cy="16" r="2.2" fill="#B0B5C3"/></svg></th>
+                      <th>ชื่อผู้ป่วย</th>
+                      <th>H/N</th>
+                      <th>ประเภท X-ray</th>
+                      <th>สถานะรายการ</th>
+                      <th>ผลลัพธ์</th>
+                      <th><svg width="14" height="14" viewBox="0 0 48 48" style="vertical-align:middle"><circle cx="24" cy="24" r="19" stroke="#B0B5C3" stroke-width="3" fill="none"/><path d="M24 22v12" stroke="#B0B5C3" stroke-width="3.5" stroke-linecap="round"/><circle cx="24" cy="16" r="2.2" fill="#B0B5C3"/></svg></th>
+                      <th>วันที่ X-ray</th>
+                      <th>จัดการ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="xrayRows"></tbody>
+                </table>
+              </div>
+
+              <div class="pagination">
+                <span>แสดงทั้งหมด</span>
+                <select id="pageSize">
+                  <option value="5">5 / page</option>
+                  <option value="10" selected>10 / page</option>
+                  <option value="12">12 / page</option>
+                </select>
+                <div class="page-buttons">
+                  <button type="button" data-page="prev">Prev</button>
+                  <button class="is-active" type="button" data-page="1">1</button>
+                  <button type="button" data-page="2">2</button>
+                  <button type="button" data-page="next">Next</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view app-view" data-view-name="dashboard" aria-label="หน้า Dashboard">
+        <div class="app-frame dashboard-frame">
+          <aside class="sidebar">
+            <div class="sidebar-brand">
+              <button class="icon-button menu-button" type="button" data-action="toggle-sidebar" aria-label="ย่อเมนู"><img src="assets/icon-menu.svg" alt="" /></button>
+              <div class="life-logo"><img src="assets/logo.png" alt="1LIFE System" /></div>
+            </div>
+
+            <nav class="side-nav" aria-label="เมนูหลัก">
+              <div class="nav-group">
+                <button class="nav-item is-active has-caret" type="button" data-route="dashboard">
+                  <img class="nav-icon" src="assets/icon-dashboard.svg" alt="" />
+                  <span>Dashboard</span>
+                  <img class="nav-caret" src="assets/icon-chevron-up.svg" alt="" />
+                </button>
+                <button class="nav-sub" type="button" data-action="hospital-overview">ภาพรวมโรงพยาบาล</button>
+                <button class="nav-sub is-active" type="button" data-route="dashboard">ภาพรวมการนัดหมาย</button>
+                <button class="nav-sub" type="button" data-action="clinic-stat">สถิติแพทย์รังสี</button>
+              </div>
+              <button class="nav-item" type="button" data-route="xray">
+                <img class="nav-icon" src="assets/icon-list.svg" alt="" />
+                <span>รายการ X-ray</span>
+                <img class="nav-caret nav-caret-down" src="assets/icon-chevron-down.svg" alt="" />
+              </button>
+            </nav>
+          </aside>
+
+          <section class="workspace">
+            <header class="topbar">
+              <div class="service-picker">
+                <img class="hospital-pin" src="assets/icon-hospital-pin.svg" alt="" />
+                <select aria-label="เลือกหน่วยบริการ">
+                  <option>หน่วยบริการ A</option>
+                  <option>หน่วยบริการ B</option>
+                  <option>หน่วยบริการ C</option>
+                </select>
+              </div>
+              <div class="topbar-actions">
+                <button class="bell-button" type="button" data-action="notifications" aria-label="การแจ้งเตือน">
+                  <img src="assets/icon-bell.svg" alt="" /><span>1</span>
+                </button>
+                <button class="profile-card" type="button" data-action="user-menu">
+                  <img class="avatar" src="assets/avatar-staff-reference.png" alt="" />
+                  <span>
+                    <strong>นายพัชรินัส จิตภักดี</strong>
+                    <small>เจ้าหน้าที่รังสี</small>
+                  </span>
+                  <img class="button-caret" src="assets/icon-chevron-down.svg" alt="" />
+                </button>
+              </div>
+            </header>
+
+            <div class="content-panel dashboard-panel">
+              <div class="dashboard-title">
+                <div>
+                  <h2>Dashboard</h2>
+                  <div class="dashboard-tabs">
+                    <button class="is-active" type="button" data-dashboard-tab="xray">สถิติการนัดหมาย X-ray</button>
+                    <button type="button" data-dashboard-tab="consult">สถิติการนัดหมาย Consult</button>
+                  </div>
+                </div>
+                <div class="dashboard-controls">
+                  <label>
+                    <span>แสดงข้อมูล :</span>
+                    <select id="dashboardRange">
+                      <option>ณ ปัจจุบัน</option>
+                      <option>สัปดาห์นี้</option>
+                      <option>เดือนนี้</option>
+                    </select>
+                  </label>
+                  <small style="display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" stroke="#B0B5C3" stroke-width="3" fill="none"/><path d="M24 22v12" stroke="#B0B5C3" stroke-width="3.5" stroke-linecap="round"/><circle cx="24" cy="16" r="2.2" fill="#B0B5C3"/></svg> ข้อมูลล่าสุด 18/04/2567</small>
+                  <button class="btn export-button" type="button" data-action="export-dashboard"><img src="assets/icon-export.svg" alt="" />Export</button>
+                </div>
+              </div>
+
+              <section class="metric-board">
+                <div class="metric-board-head">
+                  <h3>สถิติการนัดหมาย X-ray</h3>
+                  <button type="button" data-action="calendar-view"><img src="assets/icon-calendar.svg" alt="" />ดูทั้งหมด</button>
+                </div>
+                <div class="metric-strip">
+                  <article class="metric-card">
+                    <img class="summary-icon waiting" src="assets/icon-monthly-cases.png" alt="" />
+                    <p>จำนวนเคสประจำเดือน<br /><strong>มีนาคม 2567</strong></p>
+                    <b>100 <small>เคส</small></b>
+                  </article>
+                  <article class="metric-card">
+                    <img class="summary-icon urgent" src="assets/icon-urgent.svg" alt="" />
+                    <p>เคสด่วน</p>
+                    <b class="red">20 <small>เคส</small></b>
+                  </article>
+                  <article class="metric-card">
+                    <img class="summary-icon normal" src="assets/icon-normal.svg" alt="" />
+                    <p>เคสปกติ</p>
+                    <b class="green">80 <small>เคส</small></b>
+                  </article>
+                </div>
+
+                <div class="day-cards" id="dayCards"></div>
+                <button class="slider-next" type="button" data-action="next-days" aria-label="ถัดไป"><img src="assets/icon-next.svg" alt="" /></button>
+                <div class="slider-dots"><span class="is-active"></span><span></span></div>
+              </section>
+
+              <div class="dashboard-grid">
+                <article class="white-card">
+                  <h3>สถิติประเภทของการขอ Consult</h3>
+                  <div class="h-bars">
+                    <div class="h-row">
+                      <span><img src="assets/icon-brain.png" alt="" />สมอง</span>
+                      <div><i style="width: 92%"></i></div>
+                      <b>110 เคส</b>
+                    </div>
+                    <div class="h-row green-row">
+                      <span><img src="assets/icon-lung.svg" alt="" />ทรวงอก</span>
+                      <div><i style="width: 66%"></i></div>
+                      <b>80 เคส</b>
+                    </div>
+                    <div class="h-row blue-row">
+                      <span><img src="assets/icon-eye.svg" alt="" />ดวงตา</span>
+                      <div><i style="width: 42%"></i></div>
+                      <b>50 เคส</b>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="white-card consult-card">
+                  <h3>สถิติรูปแบบการ Consult</h3>
+                  <div class="donut-wrap">
+                    <div class="donut-chart">
+                      <span>1,000<small>เคสทั้งหมด</small></span>
+                      <b class="donut-label donut-label-80">80 %<small>ส่งต่อเคส</small></b>
+                      <b class="donut-label donut-label-20">20 %<small>Tele Consult</small></b>
+                    </div>
+                    <div class="consult-stats">
+                      <p><span></span>ส่งต่อเคส <b>800 <small>เคส</small></b></p>
+                      <p><span></span>Tele Consult <b>200 <small>เคส</small></b></p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <article class="chart-card">
+                <div class="chart-legend">
+                  <span class="orange-dot">รอตอบรับ</span>
+                  <span class="teal-dot">การนัดสำเร็จ</span>
+                  <span class="pink-dot">ปฏิเสธการนัด</span>
+                </div>
+                <div class="bar-chart" aria-label="กราฟสถิติ">
+                  <div class="chart-y">
+                    <span>200</span><span>150</span><span>100</span><span>50</span><span>0</span>
+                  </div>
+                  <div class="chart-area">
+                    <div class="bar-group" data-group="สมอง">
+                      <i class="bar orange-bar" style="height: 48px" data-label="รอตอบรับ" data-value="50"></i>
+                      <i class="bar teal-bar" style="height: 124px" data-label="การนัดสำเร็จ" data-value="120"></i>
+                      <i class="bar pink-bar" style="height: 28px" data-label="ปฏิเสธการนัด" data-value="30"></i>
+                      <b>สมอง</b>
+                    </div>
+                    <div class="bar-group" data-group="ทรวงอก">
+                      <i class="bar orange-bar" style="height: 70px" data-label="รอตอบรับ" data-value="70"></i>
+                      <i class="bar teal-bar" style="height: 174px" data-label="การนัดสำเร็จ" data-value="170"></i>
+                      <i class="bar pink-bar" style="height: 104px" data-label="ปฏิเสธการนัด" data-value="100"></i>
+                      <b>ทรวงอก</b>
+                    </div>
+                    <div class="bar-group" data-group="ดวงตา">
+                      <i class="bar orange-bar" style="height: 22px" data-label="รอตอบรับ" data-value="22"></i>
+                      <i class="bar teal-bar" style="height: 50px" data-label="การนัดสำเร็จ" data-value="50"></i>
+                      <i class="bar pink-bar" style="height: 8px" data-label="ปฏิเสธการนัด" data-value="8"></i>
+                      <b>ดวงตา</b>
+                    </div>
+                  </div>
+                  <div class="tooltip-card" id="barTooltip"></div>
+                </div>
+              </article>
+
+              <section class="consult-summary">
+                <h3>การนัด Consult</h3>
+                <div class="consult-boxes">
+                  <article>
+                    <img src="assets/icon-brain.png" alt="" />
+                    <b>สมอง</b>
+                    <p>Consult สำเร็จ <strong>50</strong></p>
+                    <p>ขาดการติดต่อ <strong class="red">0</strong></p>
+                  </article>
+                  <article>
+                    <img src="assets/icon-lung.svg" alt="" />
+                    <b>ทรวงอก</b>
+                    <p>Consult สำเร็จ <strong>44</strong></p>
+                    <p>ขาดการติดต่อ <strong class="red">1</strong></p>
+                  </article>
+                  <article>
+                    <img src="assets/icon-eye.svg" alt="" />
+                    <b>ดวงตา</b>
+                    <p>Consult สำเร็จ <strong>30</strong></p>
+                    <p>ขาดการติดต่อ <strong class="red">5</strong></p>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modal" hidden>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" data-action="close-modal" aria-label="ปิด">×</button>
+        <h2 id="modalTitle">รายละเอียดรายการ</h2>
+        <div id="modalBody"></div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const views = document.querySelectorAll(".view");
+      const routeButtons = document.querySelectorAll("[data-route]");
+      const modal = document.getElementById("modal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBody = document.getElementById("modalBody");
+      const toast = document.getElementById("toast");
+      const fileUpload = document.getElementById("fileUpload");
+      const xrayRows = document.getElementById("xrayRows");
+      const searchInput = document.getElementById("xraySearch");
+      const prioritySelect = document.getElementById("prioritySelect");
+      const pageSizeSelect = document.getElementById("pageSize");
+
+      const categoryStats = {
+        brain: { total: 85, waiting: 40, confirmed: 45, label: "สมอง" },
+        chest: { total: 120, waiting: 54, confirmed: 66, label: "ทรวงอก" },
+        eye: { total: 25, waiting: 8, confirmed: 17, label: "ดวงตา" },
+      };
+
+      const rows = [
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "X-ray , 2D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: true },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "MRI , 3D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: true },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "CT Scan , 2D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: true },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "CT Scan , 3D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: false },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "MRI , 3D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: false },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "X-ray , 2D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: false },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "CT Scan , 2D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: false },
+        { id: "A123456", patient: "THANYANATTHA TH...", hn: "H/N", type: "X-ray , 2D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 10.00", urgent: false },
+        { id: "A123457", patient: "PIMCHANOK SU...", hn: "H/N", type: "MRI , 3D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.15", urgent: false },
+        { id: "A123458", patient: "KANYARAT WI...", hn: "H/N", type: "CT Scan , 2D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 10.30", urgent: false },
+        { id: "A123459", patient: "NATTHAPHON CH...", hn: "H/N", type: "X-ray , 2D", category: "brain", status: "confirmed", result: "ไม่พบโรค", date: "04/03/2567 10.45", urgent: false },
+        { id: "A123460", patient: "SASITHORN PR...", hn: "H/N", type: "CT Scan , 3D", category: "brain", status: "waiting", result: "ไม่พบโรค", date: "04/03/2567 11.00", urgent: false },
+        { id: "C229910", patient: "KANOKWAN SA...", hn: "H/N", type: "X-ray , 2D", category: "chest", status: "confirmed", result: "ไม่พบโรค", date: "05/03/2567 09.30", urgent: false },
+        { id: "C229911", patient: "PATTARAPON VI...", hn: "H/N", type: "MRI , 3D", category: "chest", status: "waiting", result: "รอผล", date: "05/03/2567 11.20", urgent: true },
+        { id: "E781022", patient: "SIRIKAN YA...", hn: "H/N", type: "CT Scan , 2D", category: "eye", status: "confirmed", result: "ไม่พบโรค", date: "06/03/2567 13.10", urgent: false },
+        { id: "E781023", patient: "NAPAT CH...", hn: "H/N", type: "X-ray , 2D", category: "eye", status: "waiting", result: "รอผล", date: "06/03/2567 13.45", urgent: true },
+      ];
+
+      const dayData = [
+        { date: "TODAY", full: "27 มีนาคม 2567", urgent: 3, normal: 1 },
+        { date: "28 มีนาคม 2567", full: "", urgent: 5, normal: 12 },
+        { date: "29 มีนาคม 2567", full: "", urgent: 8, normal: 0 },
+        { date: "3 เมษายน 2567", full: "", urgent: 2, normal: 3 },
+      ];
+
+      let activeCategory = "brain";
+      let activeStatus = "all";
+      let currentPage = 1;
+      let dayOffset = 0;
+
+      function setRoute(route, replaceHash = false) {
+        views.forEach((view) => {
+          view.classList.toggle("is-active", view.dataset.viewName === route);
+        });
+        document.body.dataset.currentView = route;
+        routeButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.route === route);
+        });
+        if (route !== "login") {
+          renderTable();
+          renderDays();
+        }
+        if (replaceHash) {
+          history.replaceState(null, "", "#" + route);
+        } else if (location.hash.replace("#", "") !== route) {
+          history.pushState(null, "", "#" + route);
+        }
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => toast.classList.remove("is-visible"), 2200);
+      }
+
+      function openModal(title, html) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = html;
+        modal.hidden = false;
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+      }
+
+      function getFilteredRows() {
+        const query = (searchInput?.value || "").trim().toLowerCase();
+        const priority = prioritySelect?.value || "all";
+        return rows.filter((row) => {
+          const categoryMatch = row.category === activeCategory;
+          const statusMatch = activeStatus === "all" || row.status === activeStatus;
+          const queryMatch = !query || [row.id, row.patient, row.hn, row.type, row.result].join(" ").toLowerCase().includes(query);
+          const priorityMatch =
+            priority === "all" ||
+            (priority === "urgent" && row.urgent) ||
+            (priority === "normal" && !row.urgent) ||
+            (priority === "waiting" && row.status === "waiting") ||
+            (priority === "confirmed" && row.status === "confirmed");
+          return categoryMatch && statusMatch && queryMatch && priorityMatch;
+        });
+      }
+
+      function renderStats() {
+        const stats = categoryStats[activeCategory];
+        document.getElementById("totalCases").innerHTML = `${stats.total} <small>เคส</small>`;
+        document.getElementById("waitingCases").innerHTML = `${stats.waiting} <small>เคส</small>`;
+        document.getElementById("confirmedCases").innerHTML = `${stats.confirmed} <small>เคส</small>`;
+      }
+
+      function renderTable() {
+        if (!xrayRows) return;
+        renderStats();
+        const filtered = getFilteredRows();
+        const pageSize = Number(pageSizeSelect?.value || 10);
+        const maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
+        currentPage = Math.min(currentPage, maxPage);
+        const start = (currentPage - 1) * pageSize;
+        const pageRows = filtered.slice(start, start + pageSize);
+        xrayRows.innerHTML = pageRows.map((row, index) => {
+          const statusClass = row.status === "confirmed" ? "confirmed" : "waiting";
+          const statusText = row.status === "confirmed" ? "ยืนยันผลแล้ว" : "รอยืนยันผล";
+          return `
+            <tr class="${index % 2 !== 0 ? "soft-row" : ""}">
+              <td style="overflow:visible;white-space:nowrap"><span class="${row.urgent ? "green-dot" : "blank-dot"}"></span>${row.id}</td>
+              <td>${row.patient}</td>
+              <td>${row.hn}</td>
+              <td>${row.type}</td>
+              <td style="overflow:visible"><span class="status-pill ${statusClass}"><img src="assets/icon-status-${statusClass}.svg" alt="" />${statusText}</span></td>
+              <td><span class="result-text">• ${row.result}</span></td>
+              <td></td>
+              <td>${row.date}</td>
+              <td style="overflow:visible"><button class="detail-link" type="button" data-detail-index="${start + index}"><img src="assets/icon-eye-line.svg" alt="" />รายละเอียด</button></td>
+            </tr>
+          `;
+        }).join("") || `<tr><td colspan="9" class="empty-row">ไม่พบรายการตามเงื่อนไขที่ค้นหา</td></tr>`;
+
+        document.querySelectorAll("[data-page]").forEach((button) => {
+          const value = button.dataset.page;
+          button.classList.toggle("is-active", String(currentPage) === value);
+          button.disabled = (value === "prev" && currentPage === 1) || (value === "next" && currentPage === maxPage);
+        });
+      }
+
+      function renderDays() {
+        const target = document.getElementById("dayCards");
+        if (!target) return;
+        const rotated = [...dayData.slice(dayOffset), ...dayData.slice(0, dayOffset)];
+        target.innerHTML = rotated.map((day, index) => `
+          <article class="day-card ${index === 0 ? "is-active" : ""}">
+            <header><strong>${day.date}</strong><span>${day.full}</span></header>
+            <p><i class="urgent-line"></i>เคสด่วน <b>${day.urgent} เคส</b></p>
+            <p><i class="normal-line"></i>เคสปกติ <b>${day.normal} เคส</b></p>
+          </article>
+        `).join("");
+      }
+
+      function exportCsv(filename, records) {
+        const header = ["เลขที่รายการ", "ชื่อผู้ป่วย", "H/N", "ประเภท X-ray", "สถานะ", "ผลลัพธ์", "วันที่ X-ray"];
+        const csvRows = records.map((row) => [
+          row.id,
+          row.patient,
+          row.hn,
+          row.type,
+          row.status === "confirmed" ? "ยืนยันผลแล้ว" : "รอยืนยันผล",
+          row.result,
+          row.date,
+        ]);
+        const csv = "\uFEFF" + [header, ...csvRows].map((line) => line.map((item) => `"${String(item).replace(/"/g, '""')}"`).join(",")).join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      document.addEventListener("click", (event) => {
+        const routeButton = event.target.closest("[data-route]");
+        if (routeButton) {
+          closeModal();
+          setRoute(routeButton.dataset.route);
+          return;
+        }
+
+        const tab = event.target.closest("[data-xray-tab]");
+        if (tab) {
+          activeCategory = tab.dataset.xrayTab;
+          activeStatus = "all";
+          currentPage = 1;
+          document.querySelectorAll("[data-xray-tab]").forEach((button) => button.classList.toggle("is-active", button === tab));
+          document.querySelectorAll("[data-filter-status]").forEach((card) => card.classList.toggle("is-selected", card.dataset.filterStatus === "all"));
+          renderTable();
+          return;
+        }
+
+        const statusCard = event.target.closest("[data-filter-status]");
+        if (statusCard) {
+          activeStatus = statusCard.dataset.filterStatus;
+          currentPage = 1;
+          document.querySelectorAll("[data-filter-status]").forEach((card) => card.classList.toggle("is-selected", card === statusCard));
+          renderTable();
+          return;
+        }
+
+        const detail = event.target.closest("[data-detail-index]");
+        if (detail) {
+          const row = getFilteredRows()[Number(detail.dataset.detailIndex)] || rows[0];
+          openModal("รายละเอียดรายการ X-ray", `
+            <dl class="detail-list">
+              <div><dt>เลขที่รายการ</dt><dd>${row.id}</dd></div>
+              <div><dt>ชื่อผู้ป่วย</dt><dd>${row.patient}</dd></div>
+              <div><dt>ประเภท</dt><dd>${row.type}</dd></div>
+              <div><dt>สถานะ</dt><dd>${row.status === "confirmed" ? "ยืนยันผลแล้ว" : "รอยืนยันผล"}</dd></div>
+              <div><dt>ผลลัพธ์</dt><dd>${row.result}</dd></div>
+            </dl>
+            <button class="btn btn-primary modal-action" type="button" data-action="close-modal">รับทราบ</button>
+          `);
+          return;
+        }
+
+        const pageButton = event.target.closest("[data-page]");
+        if (pageButton) {
+          const value = pageButton.dataset.page;
+          const total = getFilteredRows().length;
+          const pageSize = Number(pageSizeSelect?.value || 10);
+          const maxPage = Math.max(1, Math.ceil(total / pageSize));
+          if (value === "prev") currentPage = Math.max(1, currentPage - 1);
+          else if (value === "next") currentPage = Math.min(maxPage, currentPage + 1);
+          else currentPage = Number(value);
+          renderTable();
+          return;
+        }
+
+        const action = event.target.closest("[data-action]")?.dataset.action;
+        if (!action) return;
+
+        if (action === "register") {
+          openModal("ลงทะเบียน", `
+            <p class="modal-copy">กรอกข้อมูลตัวอย่างเสร็จแล้ว ระบบจำลองจะพาเข้าสู่หน้ารายการ X-ray เพื่อใช้งานต่อได้ทันที</p>
+            <div class="register-grid">
+              <label>ชื่อผู้ใช้ <input value="demo.provider" /></label>
+              <label>หน่วยบริการ <input value="หน่วยบริการ A" /></label>
+            </div>
+            <button class="btn btn-primary modal-action" type="button" data-route="xray">เริ่มใช้งาน</button>
+          `);
+        }
+
+        if (action === "close-modal") closeModal();
+        if (action === "upload") fileUpload.click();
+        if (action === "export-xray") {
+          exportCsv("xray-list.csv", getFilteredRows());
+          showToast("Export รายการ X-ray แล้ว");
+        }
+        if (action === "export-dashboard") {
+          exportCsv("dashboard-xray.csv", rows);
+          showToast("Export Dashboard แล้ว");
+        }
+        if (action === "advanced-filter") {
+          prioritySelect.value = prioritySelect.value === "urgent" ? "all" : "urgent";
+          currentPage = 1;
+          renderTable();
+          showToast(prioritySelect.value === "urgent" ? "เปิดตัวกรองเคสด่วน" : "แสดงรายการทั้งหมด");
+        }
+        if (action === "toggle-sidebar") {
+          document.querySelectorAll(".app-frame").forEach((frame) => frame.classList.toggle("sidebar-collapsed"));
+        }
+        if (action === "notifications") showToast("มีรายการรอยืนยันผล 1 รายการ");
+        if (action === "user-menu") showToast("เปิดเมนูผู้ใช้งาน");
+        if (action === "waiting-list") {
+          activeStatus = "waiting";
+          currentPage = 1;
+          setRoute("xray");
+          renderTable();
+          showToast("แสดงรายการรอ X-ray / รอยืนยันผล");
+        }
+        if (action === "hospital-overview" || action === "clinic-stat" || action === "calendar-view") showToast("สลับมุมมองข้อมูลแล้ว");
+        if (action === "next-days") {
+          dayOffset = (dayOffset + 1) % dayData.length;
+          renderDays();
+        }
+      });
+
+      searchInput?.addEventListener("input", () => {
+        currentPage = 1;
+        renderTable();
+      });
+
+      prioritySelect?.addEventListener("change", () => {
+        currentPage = 1;
+        renderTable();
+      });
+
+      pageSizeSelect?.addEventListener("change", () => {
+        currentPage = 1;
+        renderTable();
+      });
+
+      fileUpload?.addEventListener("change", () => {
+        const files = Array.from(fileUpload.files || []);
+        if (!files.length) return;
+        files.forEach((file, index) => {
+          rows.unshift({
+            id: "UP" + String(Date.now()).slice(-5) + index,
+            patient: file.name.replace(/\.[^.]+$/, "").slice(0, 18).toUpperCase(),
+            hn: "H/N",
+            type: file.name.toLowerCase().endsWith(".dcm") ? "DICOM , 2D" : "X-ray , 2D",
+            category: activeCategory,
+            status: "waiting",
+            result: "รอผล",
+            date: new Date().toLocaleDateString("th-TH") + " " + new Date().toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" }),
+            urgent: true,
+          });
+        });
+        currentPage = 1;
+        renderTable();
+        showToast(`อัปโหลด ${files.length} ไฟล์สำเร็จ`);
+        fileUpload.value = "";
+      });
+
+      document.querySelectorAll("[data-dashboard-tab]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll("[data-dashboard-tab]").forEach((tab) => tab.classList.toggle("is-active", tab === button));
+          showToast(button.dataset.dashboardTab === "xray" ? "แสดงสถิติการนัดหมาย X-ray" : "แสดงสถิติ Consult");
+        });
+      });
+
+      window.addEventListener("popstate", () => {
+        const route = location.hash.replace("#", "") || "login";
+        setRoute(["login", "xray", "dashboard"].includes(route) ? route : "login", true);
+      });
+
+      const initialRoute = location.hash.replace("#", "");
+      setRoute(["login", "xray", "dashboard"].includes(initialRoute) ? initialRoute : "login", true);
+
+      // Bar chart hover tooltip
+      const barTooltip = document.getElementById("barTooltip");
+      if (barTooltip) {
+        document.querySelectorAll(".bar-chart .bar").forEach((bar) => {
+          bar.addEventListener("mouseenter", () => {
+            const group = bar.closest(".bar-group");
+            const groupName = group?.dataset.group || "";
+            const label = bar.dataset.label || "";
+            const value = bar.dataset.value || "";
+            barTooltip.innerHTML = `<span style="font-size:12px;font-weight:700">${groupName}</span><br/><span style="font-size:11px;font-weight:500">${label}  ${value} เคส</span>`;
+            barTooltip.style.display = "grid";
+            const barRect = bar.getBoundingClientRect();
+            const chartRect = barTooltip.closest(".bar-chart").getBoundingClientRect();
+            const tipW = barTooltip.offsetWidth || 120;
+            const tipH = barTooltip.offsetHeight || 50;
+            let left = barRect.left - chartRect.left + barRect.width / 2 - tipW / 2;
+            let top = barRect.top - chartRect.top - tipH - 10;
+            if (left < 0) left = 0;
+            barTooltip.style.left = left + "px";
+            barTooltip.style.top = top + "px";
+          });
+          bar.addEventListener("mouseleave", () => {
+            barTooltip.style.display = "none";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

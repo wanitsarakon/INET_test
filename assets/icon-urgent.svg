@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <path d="M34 24v-9c0-4 3-7 7-7h14c4 0 7 3 7 7v9" fill="none" stroke="#E84050" stroke-width="5" stroke-linecap="round"/>
+  <rect x="8" y="24" width="80" height="62" rx="9" fill="#FFF3F4"/>
+  <clipPath id="urgbox"><rect x="8" y="24" width="80" height="62" rx="9"/></clipPath>
+  <rect x="8" y="24" width="26" height="62" fill="#FE8A94" clip-path="url(#urgbox)"/>
+  <rect x="8" y="39" width="26" height="5" fill="#E84050" opacity="0.45" clip-path="url(#urgbox)"/>
+  <rect x="8" y="54" width="26" height="5" fill="#E84050" opacity="0.45" clip-path="url(#urgbox)"/>
+  <rect x="8" y="69" width="26" height="5" fill="#E84050" opacity="0.45" clip-path="url(#urgbox)"/>
+  <rect x="45" y="33" width="10" height="30" rx="3" fill="#E84050"/>
+  <rect x="34" y="43" width="32" height="10" rx="3" fill="#E84050"/>
+</svg>
