@@ -728,7 +728,7 @@ button:disabled {
 }
 
 .app-frame:not(.dashboard-frame) .xray-table {
-  min-width: 1120px;
+  min-width: 1144px;
   font-size: 12px;
   table-layout: fixed;
 }
@@ -740,7 +740,7 @@ button:disabled {
 .app-frame:not(.dashboard-frame) .xray-table col:nth-child(5) { width: 150px; }
 .app-frame:not(.dashboard-frame) .xray-table col:nth-child(6) { width: 110px; }
 .app-frame:not(.dashboard-frame) .xray-table col:nth-child(7) { width: 36px; }
-.app-frame:not(.dashboard-frame) .xray-table col:nth-child(8) { width: 188px; }
+.app-frame:not(.dashboard-frame) .xray-table col:nth-child(8) { width: 210px; }
 .app-frame:not(.dashboard-frame) .xray-table col:nth-child(9) { width: 148px; }
 
 .app-frame:not(.dashboard-frame) .xray-table th {
@@ -761,29 +761,41 @@ button:disabled {
   max-width: 0;
 }
 
-.app-frame:not(.dashboard-frame) .detail-link {
-  min-height: 32px;
-  padding: 0 6px;
+.app-frame:not(.dashboard-frame) .action-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-frame:not(.dashboard-frame) .eye-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
   border: 0;
-  border-radius: 0;
+  border-radius: 8px;
+  box-shadow: 0px 0px 1px rgba(40, 41, 61, 0.08), 0px 0.5px 2px rgba(96, 97, 112, 0.16);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.app-frame:not(.dashboard-frame) .eye-btn:hover {
+  box-shadow: 0px 0px 2px rgba(40, 41, 61, 0.14), 0px 2px 6px rgba(96, 97, 112, 0.24);
+}
+
+.app-frame:not(.dashboard-frame) .detail-link {
+  padding: 0;
+  border: 0;
   background: transparent;
   font-size: 13px;
-  gap: 8px;
-  color: #2051C5;
+  color: #20409C;
   text-decoration: underline;
   font-weight: 600;
   white-space: nowrap;
-}
-
-.app-frame:not(.dashboard-frame) .detail-link img {
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .app-frame:not(.dashboard-frame) .pagination {
@@ -2395,15 +2407,22 @@ small {
   color: #1f43a5;
 }
 
+.dashboard-frame .dashboard-tabs {
+  gap: 24px;
+  border-bottom: 2px solid #eef1fa;
+}
+
 .dashboard-frame .dashboard-tabs button {
   min-height: 30px;
   font-size: 14px;
   padding-bottom: 12px;
   font-weight: 500;
+  color: #8c96b0;
 }
 
-.dashboard-frame .dashboard-tabs {
-  gap: 24px;
+.dashboard-frame .dashboard-tabs button.is-active {
+  color: #1f43a5;
+  font-weight: 700;
 }
 
 .dashboard-frame .dashboard-controls {
