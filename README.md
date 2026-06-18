@@ -5,16 +5,29 @@
 
 โปรเจกต์นี้เป็นหน้าเว็บ static สำหรับจำลองระบบ `1LIFE System` ตามภาพตัวอย่าง ประกอบด้วย 3 หน้าหลัก คือหน้าเข้าสู่ระบบ, หน้ารายการ X-ray และหน้า Dashboard โดยทำงานผ่าน HTML, CSS และ JavaScript ในไฟล์เดียว ไม่ต้องติดตั้ง dependency เพิ่ม
 
+## การอัพเดทล่าสุด
+
+- **ตาราง X-ray — คอลัมน์วันที่**: เพิ่มความกว้างคอลัมน์ "วันที่ X-ray" เป็น 210px เพื่อแสดงข้อความ `04/03/2567 10.00 น.` ได้ครบโดยไม่ถูกตัด
+- **ตาราง X-ray — ปุ่มจัดการ**: รีดีไซน์ให้ตรงตาม Figma — ปุ่มไอคอนตา (28×28px, ขอบมน 8px, พื้นขาว, เงา) + ลิงก์ "รายละเอียด" สีน้ำเงิน underline แยกจากกัน
+- **Dashboard — header**: เปลี่ยนไอคอนเป็นนาฬิกา SVG และข้อความ "ข้อมูลอัพเดท" พร้อมวันที่
+- **Dashboard — tabs**: เพิ่ม border-bottom และสีแท็บ active เป็น `#1f43a5`
+- **Dashboard — Donut chart**: เปลี่ยนจาก CSS conic-gradient เป็น SVG arc path พร้อม hover tooltip (เหมือน bar chart) และ floating label 80%/20%
+- **Dashboard — Layout**: ใช้ absolute positioning สำหรับ sidebar/workspace พร้อม `overflow: visible` เพื่อรองรับ vertical scroll
+- **ไอคอน icon-normal.svg**: รีดีไซน์เป็นกล่องพยาบาลลายแถบสีเขียวให้ตรงกับ icon-urgent.svg
+
 ## ไฟล์ในโปรเจกต์
 
 ```text
 test_inet/
 ├── assets/
+│   ├── logo.png              # โลโก้ 1LIFE
 │   ├── login-panel.png       # ภาพประกอบหน้า Login
 │   ├── icon-brain.png        # ไอคอนสมอง
 │   ├── icon-waiting.png      # ไอคอนเอกสารรอยืนยันผล
 │   ├── icon-confirmed.png    # ไอคอนเวชระเบียน
 │   ├── icon-monthly-cases.png # ไอคอนจำนวนเคสประจำเดือนใน Dashboard
+│   ├── icon-normal.svg       # ไอคอนเคสปกติ (กล่องพยาบาลลายแถบเขียว)
+│   ├── icon-urgent.svg       # ไอคอนเคสเร่งด่วน
 │   ├── avatar-staff-reference.png # รูปเจ้าหน้าที่จากภาพดีไซน์อ้างอิง
 │   └── *.svg                 # โลโก้และไอคอน UI แบบคมชัด
 ├── index.html   # โครงสร้างหน้าเว็บและ JavaScript สำหรับ interaction
@@ -70,21 +83,23 @@ py -m http.server 8000
 - ค้นหารายการ X-ray
 - กรองตามความเร่งด่วน / สถานะ
 - ปุ่มตัวกรองขั้นสูง
-- ตารางรายการ X-ray พร้อมปุ่มรายละเอียด
+- ตารางรายการ X-ray พร้อมปุ่มจัดการ (ไอคอนตา + รายละเอียด) ตรงตาม Figma
+- คอลัมน์ "วันที่ X-ray" แสดงข้อความเต็ม เช่น `04/03/2567 10.00 น.`
 - Pagination
 - ปุ่มอัปโหลดฟิล์ม X-ray จำลองการเพิ่มแถวข้อมูล
 - ปุ่ม Export ดาวน์โหลดไฟล์ CSV
 
 ### 3. หน้า Dashboard
 
-- Sidebar พร้อมเมนูย่อย
+- Long Scroll Layout, Card Based Layout, Vertical Scroll
+- Sidebar แบบ absolute positioning (กว้าง 228px, สูง 1459px) พร้อมย่อขยายได้
+- Header แสดง Dashboard title + ไอคอนนาฬิกา + "ข้อมูลอัพเดท" + วันที่
+- Tab active สี `#1f43a5` พร้อม border-bottom
 - สรุปจำนวนเคสประจำเดือน
-- ไอคอนจำนวนเคสประจำเดือนที่สร้างให้ตรงกับดีไซน์ Dashboard
-- Card เคสด่วน / เคสปกติ
+- Card เคสด่วน / เคสปกติ (ไอคอนลายแถบเขียว)
 - การ์ดรายวันพร้อมปุ่มเลื่อน
-- กราฟประเภท Consult
-- Donut chart รูปแบบ Consult
-- Bar chart สถิติ
+- **Donut chart SVG** รูปแบบ Consult พร้อม hover tooltip + floating label 80%/20%
+- Bar chart สถิติพร้อม hover tooltip
 - สรุปการนัด Consult
 - ปุ่ม Export ดาวน์โหลดไฟล์ CSV
 
@@ -99,35 +114,35 @@ py -m http.server 8000
 - Export CSV
 - ย่อ/ขยาย sidebar
 - เปลี่ยน tab และ card filter
+- Hover tooltip บน Donut chart และ Bar chart
 
-## แนวทาง Auto Layout
+## โครงสร้าง Layout
 
+| หน้า | เทคนิค Layout |
+|------|--------------|
+| Login | Flexbox จัดกลาง |
+| X-ray | CSS Grid (sidebar + content) + sticky table header |
+| Dashboard | Absolute positioning (1440px frame) + vertical scroll |
+
+แนวทาง Auto Layout:
 - `Horizontal`: Top bar, Tabs, Summary cards, Toolbar, Pagination, Metric cards, Day cards และกลุ่ม Consult
 - `Vertical`: Sidebar, กลุ่มเมนู, Content panel, Dashboard sections, Filter controls และข้อมูลภายในแต่ละ Consult card
-- Component บางรายการใช้ Horizontal ชั้นนอกและ Vertical ชั้นใน เช่น Profile card, Metric card และ Consult summary
-- กฎทิศทางหลักถูกรวมไว้ในส่วน `Auto-layout flow contract` ภายใน `styles.css`
 
 ## โทนสีหลัก
 
-ใช้ชุดสีตามที่กำหนดไว้ใน `:root` ของ `styles.css` เช่น:
-
-```css
-#FFFFFF
-#FFFFFFA3
-#F5F7FF
-#FFFFFF80
-#28293D0A
-#60617029
-#FBFCFE
-```
+| การใช้งาน | สี |
+|-----------|-----|
+| Primary (ปุ่ม, active) | `#20409C` |
+| Dashboard title | `#1f43a5` |
+| เคสปกติ (icon) | `#0FAD78` |
+| พื้นหลัง Dashboard | `radial-gradient` + `linear-gradient` |
+| Panel | `rgba(255,255,255,0.95)` |
 
 ## หมายเหตุเรื่องรูปภาพและความตรงกับต้นแบบ
 
 ภาพประกอบฝั่งซ้ายของหน้า Login ใช้ไฟล์ `assets/login-panel.png` ซึ่งเตรียมจาก PNG ดีไซน์ต้นฉบับ ส่วนไอคอนและกราฟประกอบอื่นสร้างด้วย PNG, CSS และ SVG โดยไม่ต้องพึ่งไลบรารีภายนอก
 
 ไอคอนทางการแพทย์หลักถูกสร้างเป็น PNG พื้นหลังโปร่งใส และไอคอน UI เช่น Filter, Export, การแจ้งเตือน และโลโก้ใช้ SVG เพื่อให้คมชัดทุกขนาด
-
-ถ้าต้องการให้รูปเป๊ะ 100% แนะนำให้เพิ่มไฟล์ asset จริงจาก Figma แล้วแทนที่ส่วน SVG/emoji ใน `index.html`
 
 ## Browser ที่แนะนำ
 
