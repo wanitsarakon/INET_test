@@ -416,10 +416,20 @@
                 <article class="white-card consult-card">
                   <h3>สถิติรูปแบบการ Consult</h3>
                   <div class="donut-wrap">
-                    <div class="donut-chart">
-                      <span>1,000<small>เคสทั้งหมด</small></span>
-                      <b class="donut-label donut-label-80">80 %<small>ส่งต่อเคส</small></b>
-                      <b class="donut-label donut-label-20">20 %<small>Tele Consult</small></b>
+                    <div class="donut-chart-wrap">
+                      <svg class="donut-svg" viewBox="0 0 200 200" id="donutChart" aria-label="กราฟสถิติรูปแบบการ Consult">
+                        <!-- ส่งต่อเคส 80% -->
+                        <path class="donut-seg" data-label="ส่งต่อเคส" data-pct="80" data-value="800"
+                          d="M100,16 A84,84 0 1,1 20.11,74.03 L56.25,85.78 A46,46 0 1,0 100,54 Z"
+                          fill="#F19494" stroke="white" stroke-width="2.5"/>
+                        <!-- Tele Consult 20% -->
+                        <path class="donut-seg" data-label="Tele Consult" data-pct="20" data-value="200"
+                          d="M20.11,74.03 A84,84 0 0,1 100,16 L100,54 A46,46 0 0,0 56.25,85.78 Z"
+                          fill="#EEC27F" stroke="white" stroke-width="2.5"/>
+                        <text x="100" y="96" text-anchor="middle" class="donut-num">1,000</text>
+                        <text x="100" y="114" text-anchor="middle" class="donut-sub">เคสทั้งหมด</text>
+                      </svg>
+                      <div class="donut-tip" id="donutTip"></div>
                     </div>
                     <div class="consult-stats">
                       <p><span></span>ส่งต่อเคส <b>800 <small>เคส</small></b></p>
@@ -837,6 +847,37 @@
 
       const initialRoute = location.hash.replace("#", "");
       setRoute(["login", "xray", "dashboard"].includes(initialRoute) ? initialRoute : "login", true);
+
+      // Donut chart hover tooltip
+      const donutChart = document.getElementById("donutChart");
+      const donutTip = document.getElementById("donutTip");
+      if (donutChart && donutTip) {
+        donutChart.querySelectorAll(".donut-seg").forEach((seg) => {
+          seg.addEventListener("mouseenter", () => {
+            const pct = seg.dataset.pct;
+            const label = seg.dataset.label;
+            const value = seg.dataset.value;
+            donutTip.innerHTML = `<span style="font-size:13px;font-weight:700">${pct} %</span><small>${label}  ${value} เคส</small>`;
+            donutTip.style.display = "block";
+          });
+          seg.addEventListener("mousemove", (e) => {
+            const wrap = donutTip.closest(".donut-chart-wrap");
+            const wrapRect = wrap.getBoundingClientRect();
+            const tipW = donutTip.offsetWidth || 90;
+            const tipH = donutTip.offsetHeight || 50;
+            let x = e.clientX - wrapRect.left - tipW / 2;
+            let y = e.clientY - wrapRect.top - tipH - 10;
+            if (x < 0) x = 0;
+            if (x + tipW > wrapRect.width) x = wrapRect.width - tipW;
+            if (y < 0) y = e.clientY - wrapRect.top + 10;
+            donutTip.style.left = x + "px";
+            donutTip.style.top = y + "px";
+          });
+          seg.addEventListener("mouseleave", () => {
+            donutTip.style.display = "none";
+          });
+        });
+      }
 
       // Bar chart hover tooltip
       const barTooltip = document.getElementById("barTooltip");
