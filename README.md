@@ -5,36 +5,6 @@
 
 โปรเจกต์นี้เป็นหน้าเว็บ static สำหรับจำลองระบบ `1LIFE System` ตามภาพตัวอย่าง ประกอบด้วย 3 หน้าหลัก คือหน้าเข้าสู่ระบบ, หน้ารายการ X-ray และหน้า Dashboard โดยทำงานผ่าน HTML, CSS และ JavaScript ในไฟล์เดียว ไม่ต้องติดตั้ง dependency เพิ่ม
 
-## การอัพเดทล่าสุด
-
-- **ตาราง X-ray — คอลัมน์วันที่**: เพิ่มความกว้างคอลัมน์ "วันที่ X-ray" เป็น 210px เพื่อแสดงข้อความ `04/03/2567 10.00 น.` ได้ครบโดยไม่ถูกตัด
-- **ตาราง X-ray — ปุ่มจัดการ**: รีดีไซน์ให้ตรงตาม Figma — ปุ่มไอคอนตา (28×28px, ขอบมน 8px, พื้นขาว, เงา) + ลิงก์ "รายละเอียด" สีน้ำเงิน underline แยกจากกัน
-- **Dashboard — header**: เปลี่ยนไอคอนเป็นนาฬิกา SVG และข้อความ "ข้อมูลอัพเดท" พร้อมวันที่
-- **Dashboard — tabs**: เพิ่ม border-bottom และสีแท็บ active เป็น `#1f43a5`
-- **Dashboard — Donut chart**: เปลี่ยนจาก CSS conic-gradient เป็น SVG arc path พร้อม hover tooltip (เหมือน bar chart) และ floating label 80%/20%
-- **Dashboard — Layout**: ใช้ absolute positioning สำหรับ sidebar/workspace พร้อม `overflow: visible` เพื่อรองรับ vertical scroll
-- **ไอคอน icon-normal.svg**: รีดีไซน์เป็นกล่องพยาบาลลายแถบสีเขียวให้ตรงกับ icon-urgent.svg
-
-## ไฟล์ในโปรเจกต์
-
-```text
-test_inet/
-├── assets/
-│   ├── logo.png              # โลโก้ 1LIFE
-│   ├── login-panel.png       # ภาพประกอบหน้า Login
-│   ├── icon-brain.png        # ไอคอนสมอง
-│   ├── icon-waiting.png      # ไอคอนเอกสารรอยืนยันผล
-│   ├── icon-confirmed.png    # ไอคอนเวชระเบียน
-│   ├── icon-monthly-cases.png # ไอคอนจำนวนเคสประจำเดือนใน Dashboard
-│   ├── icon-normal.svg       # ไอคอนเคสปกติ (กล่องพยาบาลลายแถบเขียว)
-│   ├── icon-urgent.svg       # ไอคอนเคสเร่งด่วน
-│   ├── avatar-staff-reference.png # รูปเจ้าหน้าที่จากภาพดีไซน์อ้างอิง
-│   └── *.svg                 # โลโก้และไอคอน UI แบบคมชัด
-├── index.html   # โครงสร้างหน้าเว็บและ JavaScript สำหรับ interaction
-├── styles.css   # สไตล์ทั้งหมดของทั้ง 3 หน้า
-└── README.md    # คู่มือการรันและรายละเอียดโปรเจกต์
-```
-
 ## วิธีรันบน localhost
 
 เปิด Terminal / PowerShell ในโฟลเดอร์โปรเจกต์ แล้วรัน:
@@ -64,6 +34,29 @@ py -m http.server 8000
 ## วิธีเปิดแบบไม่ใช้ server
 
 สามารถดับเบิลคลิกไฟล์ `index.html` เพื่อเปิดใน Browser ได้เช่นกัน แต่แนะนำให้รันผ่าน localhost เพราะใกล้เคียงการใช้งานเว็บจริงกว่า
+
+
+
+## ไฟล์ในโปรเจกต์
+
+```text
+test_inet/
+├── assets/
+│   ├── logo.png              # โลโก้ 1LIFE
+│   ├── login-panel.png       # ภาพประกอบหน้า Login
+│   ├── icon-brain.png        # ไอคอนสมอง
+│   ├── icon-waiting.png      # ไอคอนเอกสารรอยืนยันผล
+│   ├── icon-confirmed.png    # ไอคอนเวชระเบียน
+│   ├── icon-monthly-cases.png # ไอคอนจำนวนเคสประจำเดือนใน Dashboard
+│   ├── case.png              # ไอคอนเคสด่วน
+│   ├── case2.png             # ไอคอนเคสปกติ
+│   ├── avatar-staff-reference.png # รูปเจ้าหน้าที่จากภาพดีไซน์อ้างอิง
+│   └── *.svg                 # โลโก้และไอคอน UI แบบคมชัด
+├── index.html   # โครงสร้างหน้าเว็บและ JavaScript สำหรับ interaction
+├── styles.css   # สไตล์ทั้งหมดของทั้ง 3 หน้า
+└── README.md    # คู่มือการรันและรายละเอียดโปรเจกต์
+```
+
 
 ## หน้าที่มีในระบบ
 
@@ -96,7 +89,7 @@ py -m http.server 8000
 - Header แสดง Dashboard title + ไอคอนนาฬิกา + "ข้อมูลอัพเดท" + วันที่
 - Tab active สี `#1f43a5` พร้อม border-bottom
 - สรุปจำนวนเคสประจำเดือน
-- Card เคสด่วน / เคสปกติ (ไอคอนลายแถบเขียว)
+- Card เคสด่วน (`case.png`) / เคสปกติ (`case2.png`)
 - การ์ดรายวันพร้อมปุ่มเลื่อน
 - **Donut chart SVG** รูปแบบ Consult พร้อม hover tooltip + floating label 80%/20%
 - Bar chart สถิติพร้อม hover tooltip
